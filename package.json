@@ -32,6 +32,7 @@
     "googleapis": "^25.0.0",
     "node-sass": "^4.7.1",
     "qs": "^6.5.1",
-    "react-big-calendar": "^0.18.0"
+    "react-big-calendar": "^0.18.0",
+    "simple-react-calendar": "^1.7.0"
   }
 }

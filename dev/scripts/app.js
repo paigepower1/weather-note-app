@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Qs from 'qs';
 import index from 'axios';
-// import BigCalendar from 'react-big-calendar';
-// import moment from 'moment';
 // import EggCounter from './EggCounter';
 // api key: c17bad791422b42a39a8f8e4299b6c53
 
@@ -75,13 +73,13 @@ class App extends React.Component {
         timezone: res.data.timezone,
         temperature: res.data.currently.temperature,
         summary: res.data.currently.summary,
-        icon: res.data.currently.icon,
+        icon: res.data.currently.icon
         // eggInput: ""
       });
 
       // skycons
       let icons = new Skycons({
-        'color':"#000000"
+        'color':"yellow"
       }),
         list = [
           "clear-day", "clear-night", "partly-cloudy-day",
@@ -96,9 +94,9 @@ class App extends React.Component {
         icons.play();
     });
 
-    const dbref = firebase.database().ref("/eggsLaid");
+    const dbrefAll = firebase.database().ref("/AllData");
 
-    dbref.on("value", (snapshot) => {
+    dbrefAll.on("value", (snapshot) => {
       const data = snapshot.val();
       const state = [];
       for(let key in data) {
@@ -118,24 +116,42 @@ class App extends React.Component {
     const eggInput = {
       value: this.state.eggInput
     };
+    
+    // make new variable
+    // add everything in here that I want pushed to firebase
+    const AllData = {
+      timezone: this.state.timezone,
+      temperature: this.state.temperature,
+      summary: this.state.summary,
+      icons: this.state.icons,
+      eggInput: this.state.eggInput
+    }
 
     // .ref is method on firebase that makes reference to where we push data to
     // push data to firebase to eggs array here
-    const dbref = firebase.database().ref("/eggsLaid");
-    dbref.push(eggInput);
+    const dbRefAllData = firebase.database().ref("/AllData");
+    dbRefAllData.push(AllData);
 
     this.setState({
       eggInput: ""
     });
   }
 
+  // handleChange(e) {
+  //   console.log("handling the change");
+  //   console.log(e.target.id);
+  //   this.setState({
+  //     [e.target.id]: e.target.value
+  //   });
+  // }
+
     // everything that gets displayed on page goes here
     render() {
       return (
         <div className="main">
           <div className="weather">
-            <p>{this.state.timezone}</p>
-            <p>{this.state.summary}</p>
+            <p className="timeZone">{this.state.timezone}</p>
+            <p className="weatherSummary">{this.state.summary}</p>
            <div className="tempIconFlex">
               <canvas className="flexIcon" id={this.state.icon} width="100" height="100"></canvas>
               <p className="flexTemp">{this.state.temperature}<span className="celcius">℃</span></p>
@@ -143,11 +159,19 @@ class App extends React.Component {
           </div>
          <div className="userInput">
             <form onSubmit={this.addEgg}>
-              <label htmlFor="eggInput">Enter number of eggs laid today</label>
-              <input className="input" type="text" value={this.state.eggInput} onChange={this.handleChange} id="eggInput"/>
+              <input className="input" type="text" placeholder="Number of eggs"value={this.state.eggInput} onChange={this.handleChange} id="eggInput"/>
+              {/* on submit add weather and egg input to firebase */}
               <input className="submitButton" type="submit" value="Upload to calendar" />
             </form>
          </div>
+         {/* <div>
+           <ul>
+             {this.state.}
+             return(
+
+             )
+           </ul>
+         </div> */}
           {/* <div>
             {this.state.eggsLaid.map((eggInput) => {
               return (

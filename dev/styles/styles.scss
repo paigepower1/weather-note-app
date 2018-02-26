@@ -2,6 +2,8 @@
 body {
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
+    background: lightblue;
+    color: white;
 }
 
 .wrapper {
@@ -27,6 +29,14 @@ div.main {
     position: relative;
 }
 
+.timeZone {
+    margin-top: 0;
+}
+
+.weatherSummary {
+    margin-bottom: 0;
+}
+
 .celcius {
     font-size: 20px;
     position: absolute;
@@ -44,7 +54,7 @@ div.main {
 .input {
     border-radius: 50px;
     padding: 10px 10px;
-    border: 1px solid blue;
+    border: 1px solid black;
     font-size: 18px;
 }
 
