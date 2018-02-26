@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Qs from 'qs';
 import index from 'axios';
+// import BigCalendar from 'react-big-calendar';
+// import moment from 'moment';
 // import EggCounter from './EggCounter';
 // api key: c17bad791422b42a39a8f8e4299b6c53
 
@@ -130,16 +132,22 @@ class App extends React.Component {
     // everything that gets displayed on page goes here
     render() {
       return (
-        <div>
-          <p>{this.state.timezone}</p>
-          <p>{this.state.temperature}℃</p>
-          <p>{this.state.summary}</p>
-          <canvas id={this.state.icon} width="80" height="80"></canvas>
-          <form onSubmit={this.addEgg}>
-            <label htmlFor="eggInput">Enter number of eggs laid</label>
-            <input type="text" value={this.state.eggInput} onChange={this.handleChange} id="eggInput"/>
-            <input type="submit" value="Upload to calendar" />
-          </form>
+        <div className="main">
+          <div className="weather">
+            <p>{this.state.timezone}</p>
+            <p>{this.state.summary}</p>
+           <div className="tempIconFlex">
+              <canvas className="flexIcon" id={this.state.icon} width="100" height="100"></canvas>
+              <p className="flexTemp">{this.state.temperature}<span className="celcius">℃</span></p>
+           </div>
+          </div>
+         <div className="userInput">
+            <form onSubmit={this.addEgg}>
+              <label htmlFor="eggInput">Enter number of eggs laid today</label>
+              <input className="input" type="text" value={this.state.eggInput} onChange={this.handleChange} id="eggInput"/>
+              <input className="submitButton" type="submit" value="Upload to calendar" />
+            </form>
+         </div>
           {/* <div>
             {this.state.eggsLaid.map((eggInput) => {
               return (

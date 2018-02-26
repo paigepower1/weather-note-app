@@ -1,0 +1,55 @@
+
+body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+.wrapper {
+    max-width: 1080;
+    width: 90%;
+    margin: 0 auto;
+}
+
+div.main {
+    display: flex;
+    justify-content: center;
+}
+
+.tempIconFlex {
+    display: flex;
+}
+
+// .flexicon {
+// }
+
+.flexTemp {
+    font-size: 30px;
+    position: relative;
+}
+
+.celcius {
+    font-size: 20px;
+    position: absolute;
+    top: -5px;
+}
+
+.userInput {
+    margin-left: 50px;
+}
+
+.submitButton {
+    height: 50px;
+}
+
+.input {
+    border-radius: 50px;
+    padding: 10px 10px;
+    border: 1px solid blue;
+    font-size: 18px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin-right: 50px;
+}
