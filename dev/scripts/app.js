@@ -142,7 +142,7 @@ class App extends React.Component {
     render() {
       return (
         <div className="wrapper">
-             <p className="timeZone">{this.state.timezone}</p>
+             <h2 className="timeZone">{this.state.timezone}</h2>
              <p className="weatherSummary">{this.state.summary}</p>
           <div>
              <div className="tempIconFlex">

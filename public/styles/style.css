@@ -136,7 +136,7 @@ body {
   font-size: 18px;
   font-weight: 500;
   background: lightblue;
-  color: #000000; }
+  color: white; }
 
 .wrapper {
   max-width: 1080px;
@@ -149,7 +149,8 @@ body {
 
 .timeZone {
   margin-top: 30px;
-  font-weight: 600; }
+  font-weight: 600;
+  border-bottom: 2px solid white; }
 
 .tempIconFlex {
   display: flex; }
@@ -196,3 +197,6 @@ form {
 
 img {
   width: 200px; }
+
+.submitButton {
+  color: white; }
