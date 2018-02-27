@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Qs from 'qs';
 import index from 'axios';
-// import EggCounter from './EggCounter';
+import EggCounter from './EggCounter';
+import EggIcon from './EggIcon';
 // api key: c17bad791422b42a39a8f8e4299b6c53
 
 // Initialize Firebase
@@ -137,45 +138,32 @@ class App extends React.Component {
     });
   }
 
-  // handleChange(e) {
-  //   console.log("handling the change");
-  //   console.log(e.target.id);
-  //   this.setState({
-  //     [e.target.id]: e.target.value
-  //   });
-  // }
-
     // everything that gets displayed on page goes here
     render() {
       return (
-        <div className="main">
-          <div className="weather">
-            <p className="timeZone">{this.state.timezone}</p>
-            <p className="weatherSummary">{this.state.summary}</p>
-           <div className="tempIconFlex">
-              <canvas className="flexIcon" id={this.state.icon} width="100" height="100"></canvas>
-              <p className="flexTemp">{this.state.temperature}<span className="celcius">℃</span></p>
-           </div>
+        <div className="wrapper">
+             <p className="timeZone">{this.state.timezone}</p>
+             <p className="weatherSummary">{this.state.summary}</p>
+          <div>
+             <div className="tempIconFlex">
+                <canvas className="flexIcon" id={this.state.icon} width="100" height="100"></canvas>
+                <p className="flexTemp">{this.state.temperature}<span className="celcius">℃</span></p>
+             </div>
+             <div className="icon">
+                 <EggIcon />
+             </div>
           </div>
-         <div className="userInput">
             <form onSubmit={this.addEgg}>
-              <input className="input" type="text" placeholder="Number of eggs"value={this.state.eggInput} onChange={this.handleChange} id="eggInput"/>
+              <input className="input" type="text" placeholder="Enter number of chicken eggs"value={this.state.eggInput} onChange={this.handleChange} id="eggInput"/>
               {/* on submit add weather and egg input to firebase */}
-              <input className="submitButton" type="submit" value="Upload to calendar" />
+              <input className="submitButton" type="submit" value="Add to calendar" />
             </form>
-         </div>
-         {/* <div>
-           <ul>
-             {this.state.}
-             return(
-
-             )
-           </ul>
-         </div> */}
+         
+         {/* this works but im not using it right now */}
           {/* <div>
             {this.state.eggsLaid.map((eggInput) => {
               return (
-                 <EggCounter data={eggInput} key={eggInput.key}
+                 <EggCounter data={eggInput} key={eggInput.key} />
               )
             })}
           </div> */}

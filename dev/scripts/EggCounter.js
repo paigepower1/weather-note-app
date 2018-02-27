@@ -1,14 +1,12 @@
-// import React from "react";
+import React from "react";
 
 
-// put in components folder later
-// const EggCounter = ((props) => {
-//      return(
-//       <li className={props.AllData}></li>
-//     )
-// }); 
-    
-    
-    
+const EggCounter = (props) => {
+     return(
+         <li>{props.data.eggInput}</li>
+    )
+}; 
+
+export default EggCounter
     
    
