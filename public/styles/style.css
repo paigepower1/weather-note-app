@@ -147,20 +147,24 @@ body {
   justify-content: center;
   align-items: center; }
 
-.tempIconFlex {
-  display: flex; }
-
-.flexTemp {
-  font-size: 30px;
-  position: relative; }
-
 .timeZone {
   margin-top: 30px;
   font-weight: 600; }
 
+.tempIconFlex {
+  display: flex; }
+
+.flexIcon {
+  margin-top: 20px; }
+
 .weatherSummary {
   margin-bottom: 0;
   font-weight: 600; }
+
+.flexTemp {
+  font-size: 30px;
+  position: relative;
+  margin-left: 20px; }
 
 .celcius {
   font-size: 20px;

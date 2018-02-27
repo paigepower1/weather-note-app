@@ -8,6 +8,7 @@ body {
     font-weight: 500;
     background: lightblue;
     color: #000000;
+    // color: white;
 }
 
 
@@ -21,21 +22,18 @@ body {
     align-items: center;
 }
 
-.tempIconFlex {
-    display: flex;
-}
-
-// .flexicon {
-// }
-
-.flexTemp {
-    font-size: 30px;
-    position: relative;
-}
 
 .timeZone {
     margin-top: 30px;;
     font-weight: 600;
+}
+
+.tempIconFlex {
+    display: flex;
+}
+
+.flexIcon {
+    margin-top: 20px;
 }
 
 .weatherSummary {
@@ -43,16 +41,16 @@ body {
     font-weight: 600;
 }
 
+.flexTemp {
+    font-size: 30px;
+    position: relative;
+    margin-left: 20px;
+}
 .celcius {
     font-size: 20px;
     position: absolute;
     top: -5px;
 }
-
-.userInput {
-    // margin-left: 50px;
-}
-
 
 .input, .submitButton {
     border-radius: 50px;
