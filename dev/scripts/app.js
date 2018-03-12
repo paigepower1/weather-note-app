@@ -5,6 +5,11 @@ import Qs from 'qs';
 import index from 'axios';
 import EggCounter from './EggCounter';
 import EggIcon from './EggIcon';
+import events from './EventCalendar';
+import BigCalendar from "react-big-calendar";
+import moment from 'moment';
+BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
+
 // api key: c17bad791422b42a39a8f8e4299b6c53
 
 // Initialize Firebase
@@ -158,6 +163,24 @@ class App extends React.Component {
               {/* on submit add weather and egg input to firebase */}
               <input className="submitButton" type="submit" value="Add to calendar" />
             </form>
+
+            <div>
+            <BigCalendar
+              popup
+              selectable
+              events={events}
+              onSelectEvent={event => alert(event.title)}
+              views={['month', 'week', 'day']}
+              />
+            </div>
+          {/* <div>
+            <EventCalendar
+              month={7}
+              year={2015}
+              events={events}
+              onEventClick={(target, eventData, day) => console.log(eventData)
+                />
+          </div> */}
          
          {/* this works but im not using it right now */}
           {/* <div>
