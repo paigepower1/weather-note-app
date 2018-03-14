@@ -173,6 +173,7 @@ class App extends React.Component {
               views={['month', 'week', 'day']}
               />
             </div>
+
           {/* <div>
             <EventCalendar
               month={7}

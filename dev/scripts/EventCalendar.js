@@ -1,5 +1,5 @@
 // import './node_modules/react-big-calendar/lib/css/react-big-calendar.css';
-// import BigCalendar from "react-big-calendar";
+import BigCalendar from "react-big-calendar";
 // require('react-big-calendar/lib/css/react-big-calendar.css');
 // BIG CALENDAR
 const events = [
