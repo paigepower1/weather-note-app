@@ -8,5 +8,3 @@ const EggCounter = (props) => {
 }; 
 
 export default EggCounter
-    
-   

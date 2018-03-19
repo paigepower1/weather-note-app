@@ -1,17 +1,14 @@
+@import "partials/calendarStyles";
 @import "partials/normalize";
 @import "partials/variables";
-
-
+// @import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 body {
     font-family: 'Raleway', sans-serif;
     font-size: 18px;
     font-weight: 500;
     background: deepskyblue;
-    // background: lighten(deepskyblue, 50%);
-    // background: lightblue;
     color: white;
-    // color: white;
 }
 
 
@@ -92,4 +89,9 @@ img {
 
 .submitButton {
     color: white;
+}
+
+.bigCalendar {
+    height: 100vh;
+    width: 100%;
 }

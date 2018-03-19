@@ -17,6 +17,7 @@ gulp.task('styles', () => {
 		.pipe(gulp.dest('./public/styles'))
 });
 
+
 gulp.task('js', () => {
 	return browserify('dev/scripts/app.js', {debug: true})
 		.transform('babelify', {
