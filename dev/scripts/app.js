@@ -154,7 +154,7 @@ class App extends React.Component {
             <form onSubmit={this.addEgg}>
               <input className="input" type="text" placeholder="Enter number of chicken eggs"value={this.state.eggInput} onChange={this.handleChange} id="eggInput"/>
               {/* on submit add weather and egg input to firebase */}
-              <input className="submitButton" type="submit" value="Add to calendar" />
+              <input className="submitButton" type="submit" value="Add data to calendar" />
             </form>
 
             <div className="bigCalendar">
