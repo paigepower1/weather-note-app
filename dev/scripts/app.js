@@ -8,7 +8,6 @@ import EggIcon from './EggIcon';
 import events from './EventCalendar';
 import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
-// import 'react-big-calendar/lib/css/react-big-calendar.css';
 BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
 
 // api key: c17bad791422b42a39a8f8e4299b6c53
@@ -49,8 +48,6 @@ class App extends React.Component {
   }
 
   handleChange(e) {
-    console.log("handling the change");
-    console.log(e.target.id);
     this.setState({
       [e.target.id]: e.target.value
     });
@@ -72,10 +69,6 @@ class App extends React.Component {
     
     // promise
     .then((res) => {
-      console.log(res)
-      console.log(res.data.currently.temperature)
-      console.log(res.data.currently.icon)
-
       this.setState ({
         timezone: res.data.timezone,
         temperature: res.data.currently.temperature,
@@ -110,7 +103,6 @@ class App extends React.Component {
       data[key].key = key;
       state.push(data[key]);
       }
-      console.log(state);
       this.setState({
         eggsLaid: state
       })
@@ -186,6 +178,7 @@ class App extends React.Component {
           </div> */}
          
          {/* this works but im not using it right now */}
+         {/* uploads to firebase */}
           {/* <div>
             {this.state.eggsLaid.map((eggInput) => {
               return (
@@ -216,7 +209,7 @@ ReactDOM.render(<App />, document.getElementById('app'));
 // return this input to user 
 
 // store user input in firebase 
-// retrun information in calendar 
+// return information in calendar 
 // store weather information in calendar
 
 
