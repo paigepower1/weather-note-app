@@ -1,21 +1,24 @@
 // import './node_modules/react-big-calendar/lib/css/react-big-calendar.css';
 import BigCalendar from "react-big-calendar";
-// import 'react-big-calendar/lib/css/react-big-calendar.css';
 
-// import 'node_modules/react-big-calendar/lib/css/react-big-calendar.css';
-// require('react-big-calendar/lib/css/react-big-calendar.css');
-// BIG CALENDAR
+// for (let i = 0; i < AllEventsInUsersFirebase.length; i++) {
+//     {
+//         start:idkey.startDate
+//         ect
+//     }
+// }
+
 const events = [
     {
-        start: '2015-07-20',
-        end: '2015-07-02',
+        start: '2018-03-26',
+        end: '2018-03-28',
         eventClasses: 'optionalEvent',
         title: 'test event',
         description: 'This is a test description of an event',
     },
     {
-        start: '2015-07-19',
-        end: '2015-07-25',
+        start: '2018-03-26',
+        end: '2018-03-28',
         title: 'test event',
         description: 'This is a test description of an event',
         data: 'you can add what ever random data you may want to use later',

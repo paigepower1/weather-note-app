@@ -3,23 +3,20 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Qs from 'qs';
 import index from 'axios';
-import EggCounter from './EggCounter';
 import EggIcon from './EggIcon';
-import events from './EventCalendar';
-import BigCalendar from 'react-big-calendar';
-import moment from 'moment';
-BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
+import NoteCard from './NoteCard.js'
+
 
 // api key: c17bad791422b42a39a8f8e4299b6c53
 
 // Initialize Firebase
-var config = {
-  apiKey: "AIzaSyB7TVAtpvGhLbdNAdktABZQailxPr58R-I",
-  authDomain: "chicken-app.firebaseapp.com",
-  databaseURL: "https://chicken-app.firebaseio.com",
-  projectId: "chicken-app",
+const config = {
+  apiKey: "AIzaSyDHisK3W0ynEStaMHBLZ-IgTp0vgjtZC7s",
+  authDomain: "paige-note-taking-app.firebaseapp.com",
+  databaseURL: "https://paige-note-taking-app.firebaseio.com",
+  projectId: "paige-note-taking-app",
   storageBucket: "",
-  messagingSenderId: "18953960665"
+  messagingSenderId: "10502024250"
 };
 firebase.initializeApp(config);
 
@@ -37,22 +34,15 @@ class App extends React.Component {
       summary: "",
       icons: "",
       // array
-      eggInput: "",
-      eggsLaid: []
+      notes: []
     };
 
     // bind here
-    this.handleChange = this.handleChange.bind(this);
-    this.addEgg = this.addEgg.bind(this);
-
+    this.showSidebar = this.showSidebar.bind(this);
+    this.addNote = this.addNote.bind(this);
   }
 
-  handleChange(e) {
-    this.setState({
-      [e.target.id]: e.target.value
-    });
-  }
-
+  
   // here is anything we want to happen after the component renders
   componentDidMount() {
     // const dbref = firebase.database().ref("/eggsLaid");
@@ -64,131 +54,100 @@ class App extends React.Component {
       },
       paramsSerializer: function (params) {
         return Qs.stringify(params, { arrayFormat: 'brackets' })
-      } 
+      }
     })
-    
-    // promise
-    .then((res) => {
-      this.setState ({
-        timezone: res.data.timezone,
-        temperature: res.data.currently.temperature,
-        summary: res.data.currently.summary,
-        icon: res.data.currently.icon
-        // eggInput: ""
-      });
 
-      // skycons
-      let icons = new Skycons({
-        'color':"yellow"
-      }),
-        list = [
-          "clear-day", "clear-night", "partly-cloudy-day",
-          "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
-          "fog"
-        ],
-        i;
+    
+
+      // promise
+      .then((res) => {
+        this.setState({
+          timezone: res.data.timezone,
+          temperature: res.data.currently.temperature,
+          summary: res.data.currently.summary,
+          icon: res.data.currently.icon
+          
+        });
+
+        // skycons
+        let icons = new Skycons({
+          'color': "yellow"
+        }),
+          list = [
+            "clear-day", "clear-night", "partly-cloudy-day",
+            "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
+            "fog"
+          ],
+          i;
 
         for (i = list.length; i--;)
           icons.set(list[i], list[i]);
 
         icons.play();
-    });
+      });
 
-    const dbrefAll = firebase.database().ref("/AllData");
-
-    dbrefAll.on("value", (snapshot) => {
-      const data = snapshot.val();
-      const state = [];
-      for(let key in data) {
-      data[key].key = key;
-      state.push(data[key]);
-      }
-      this.setState({
-        eggsLaid: state
-      })
-    });
-  }
-
-  // user input
-  addEgg(e) {
-    e.preventDefault(); 
-    const eggInput = {
-      value: this.state.eggInput
-    };
+      
+    }
     
-    // make new variable
-    // add everything in here that I want pushed to firebase
-    const AllData = {
-      timezone: this.state.timezone,
-      temperature: this.state.temperature,
-      summary: this.state.summary,
-      icons: this.state.icons,
-      eggInput: this.state.eggInput
+    showSidebar(e) {
+      e.preventDefault();
+      this.sidebar.classList.toggle("show")
+    }
+  
+    addNote(e) {
+      e.preventDefault();
+      const note = {
+        title: this.noteTitle.value,
+        text: this.noteText.value
+      };
+      const newNotes = Array.from(this.state.notes);
+      newNotes.push(note);
+      this.setState({
+        notes: newNotes
+      });
     }
 
-    // .ref is method on firebase that makes reference to where we push data to
-    // push data to firebase to eggs array here
-    const dbRefAllData = firebase.database().ref("/AllData");
-    dbRefAllData.push(AllData);
-
-    this.setState({
-      eggInput: ""
-    });
-  }
-
-    // everything that gets displayed on page goes here
-    render() {
-      return (
-        <div className="wrapper">
-             <h2 className="timeZone">{this.state.timezone}</h2>
-             <p className="weatherSummary">{this.state.summary}</p>
-          <div>
-             <div className="tempIconFlex">
-                <canvas className="flexIcon" id={this.state.icon} width="100" height="100"></canvas>
-                <p className="flexTemp">{this.state.temperature}<span className="celcius">℃</span></p>
-             </div>
-             <div className="icon">
-                 <EggIcon />
-             </div>
-          </div>
-            <form onSubmit={this.addEgg}>
-              <input className="input" type="text" placeholder="Enter number of chicken eggs"value={this.state.eggInput} onChange={this.handleChange} id="eggInput"/>
-              {/* on submit add weather and egg input to firebase */}
-              <input className="submitButton" type="submit" value="Add data to calendar" />
-            </form>
-
-            <div className="bigCalendar">
-            <BigCalendar
-              popup
-              selectable
-              events={events}
-              onSelectEvent={event => alert(event.title)}
-              views={['month', 'week', 'day']}
-              // style={style}
-              />
+  // everything that gets displayed on page goes here
+  render() {
+    return (
+      <div className="wrapper">
+        <nav>
+          <a href="" onClick={this.showSidebar}>Add Note</a>
+        </nav>
+        <section className="notes">
+          {this.state.notes.map((note, i)=> {
+            return (
+              < NoteCard note={note} key={`note-${i}`}/>
+            )
+          })}
+        </section>
+        <aside className="sidebar"ref={ref => this.sidebar = ref}>
+          <form action="" onSubmit={this.addNote}>
+            <h3>Add New Note</h3>
+            <div className="closeBtn" onClick={this.showSidebar}>
+              <i className="fa fa-times"></i>
             </div>
-
-          {/* <div>
-            <EventCalendar
-              month={7}
-              year={2015}
-              events={events}
-              onEventClick={(target, eventData, day) => console.log(eventData)
-                />
-          </div> */}
-         
-         {/* this works but im not using it right now */}
-         {/* uploads to firebase */}
-          {/* <div>
-            {this.state.eggsLaid.map((eggInput) => {
-              return (
-                 <EggCounter data={eggInput} key={eggInput.key} />
-              )
-            })}
-          </div> */}
+            <label htmlFor="note-title">Title</label>
+            <input type="text" name="note-title" ref={ref => this.noteTitle = ref}/>
+            <label htmlFor="note-text">Text:</label>
+            <textarea name="note-text" ref={ref => this.noteText = ref}></textarea>
+            <input type="submit" value="Add New Note" />
+          </form>
+        </aside>
+        <h2 className="timeZone">{this.state.timezone}</h2>
+        <p className="weatherSummary">{this.state.summary}</p>
+        <div>
+          <div className="tempIconFlex">
+            <canvas className="flexIcon" id={this.state.icon} width="100" height="100"></canvas>
+            <p className="flexTemp">{this.state.temperature}<span className="celcius">℃</span></p>
+          </div>
+          <div className="icon">
+            <EggIcon />
+          </div>
         </div>
-      )
-    }
+      </div>
+    )
+  }
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
